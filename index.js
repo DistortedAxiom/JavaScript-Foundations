@@ -136,6 +136,7 @@ function variableInterestRate(P, I, N, C) {
     }
 
     if (Array.isArray(I)) {
+
         for (let i = 0; i < interestRate.length; i++) {
 
             var totalRate = interestRate[i];
@@ -154,6 +155,8 @@ function variableInterestRate(P, I, N, C) {
 
     else {
 
+        var return_result = ""
+
         for (let i = (interestRate - 0.02); i <= (interestRate + 0.02); i = i + 0.005) {
 
             var interestRange = i.toPrecision(2);
@@ -167,12 +170,16 @@ function variableInterestRate(P, I, N, C) {
 
             var roundedRate = Math.round(monthlyRate);
 
-            console.log(name + " with an interest rate of " + interestRange + ", your monthly rate is " + roundedRate);
-        }
-    }
-}
+            var output = name + ", with an interest rate of " + interestRange + ", your monthly rate is " + roundedRate;
+            var return_result = return_result + output + "\n";
 
-variableInterestRate(200000, [0.05, 0.10, 0.30], 30);
+            console.log(name + ", with an interest rate of " + interestRange + ", your monthly rate is " + roundedRate);
+        }
+
+        return (return_result)
+    }
+
+}
 
 // 🌟🌟🌟 STRETCH 🌟🌟🌟//
 
@@ -186,6 +193,23 @@ variableInterestRate(200000, [0.05, 0.10, 0.30], 30);
 
 /* 🏡 Explore using `window.prompt()` to allow a user to input parameters in the browser */
 
+function inputGet() {
+    var param = prompt("Enter your principal, interest rate, years of payment");
+    var input = param.split(',')
+
+    var user_principal = parseInt(input[0]);
+    var user_rate = parseFloat(input[1]);
+    var user_years = parseInt(input[2]);
+
+    var result = variableInterestRate(user_principal, user_rate, user_years);
+
+    if (param != null) {
+        document.getElementById("input").innerHTML =
+        result;
+      }
+}
+
+/* DONE */
 
 /* 🏡  Refactor your `variableInterestRate()` function to accept an array of interest rates (make sure to copy and paste as to not lose your work!)
 
